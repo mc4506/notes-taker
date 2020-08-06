@@ -1,0 +1,28 @@
+{
+  "name": "note-taker",
+  "version": "1.0.0",
+  "description": "Notepad in the Browser",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --verbose"
+  },
+  "author": "mc4506",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "jest": "^26.2.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mc4506/notes-taker.git"
+  },
+  "keywords": [
+    "note",
+    "taking"
+  ],
+  "bugs": {
+    "url": "https://github.com/mc4506/notes-taker/issues"
+  },
+  "homepage": "https://github.com/mc4506/notes-taker#readme"
+}
