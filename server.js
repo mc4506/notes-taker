@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const htmlRoutes = require("./routes/htmlRoutes.js");
+const apiRoutes = require("./routes/apiRoutes.js");
 
 const PORT = 8080;
 
@@ -8,7 +9,9 @@ const PORT = 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(express.static(__dirname + '/public'));
 app.use("/", htmlRoutes);
+app.use("/", apiRoutes);
 
 
 
