@@ -20,6 +20,11 @@ routes.post("/api/notes", function(req, res){
     }).then(() => {
         // console.log(req.body);
         notes.push(req.body);
+        notes.forEach((e, i) => {
+            if(!e.id) {
+                e["id"] = i;
+            }
+        });
         console.log(notes);
         writeFileAsync("./db/db.json", JSON.stringify(notes));
      }).catch(err => {
