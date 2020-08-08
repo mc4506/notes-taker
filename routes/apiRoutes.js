@@ -13,20 +13,25 @@ routes.get("/api/notes", function(req, res){
 
 routes.post("/api/notes", function(req, res){
     let notes=[];
+    let idCounter;
     readFileAsync("./db/db.json", "utf8").then( data => {
         notes = JSON.parse(data);
+        notes.length === 0 ? idCounter = 0 : idCounter = notes[notes.length-1].id
         // console.log(notes);
     }).then(() => {
         // console.log(req.body);
         notes.push(req.body);
-        // loop through notes array and set an id for each element based on index number
-        notes.forEach((e, i) => e["id"] = i);
+        // OPTION 1: loop through notes array and set an id for each element based on index number
+        // notes.forEach((e, i) => e["id"] = i);
+        // OPTION 2: Use an ID tracker to keep track of ids
+        notes[notes.length-1]["id"] = idCounter+1;
         console.log(notes);
         writeFileAsync("./db/db.json", JSON.stringify(notes));
     }).catch(err => {
          if(err) throw err;
+         res.send({error: 'Something failed!'});
     })
-    res.end();
+    res.send("ok");
 })
 
 routes.delete("/api/notes/:id", function(req, res){
