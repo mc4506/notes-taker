@@ -10,7 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.4",
-    "jest": "^26.2.2"
+    "jest": "^26.2.2",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {},
   "repository": {
