@@ -14,6 +14,9 @@ app.use("/", htmlRoutes);
 app.use("/", apiRoutes);
 
 
+app.get("*", function(req, res){
+    res.status(404).end();
+})
 
 app.listen(PORT, function(){
     console.log("Sever is listening on http://localhost:8080");
