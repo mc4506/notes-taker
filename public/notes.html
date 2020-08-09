@@ -13,30 +13,39 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-dark">
+  <nav class="navbar navbar-dark bg-primary">
     <a class="navbar-brand" href="/">Note Taker
     </a>
-    <div class="icons">
-      <i class="fas fa-pen text-light edit-note">Edit</i>
+    <button id="show-notes-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#notes-list">
+      Show Saved Notes
+    </button>
+    <div class="icons col-12 col-sm-8">
       <i class="fas fa-save text-light save-note">Save</i>
+      <i class="fas fa-pen text-light edit-note">Edit</i>
       <i class="fas fa-file text-light new-note">New</i>
     </div>
   </nav>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-4 list-container">
+      <div id="notes-list" class="col-12 col-sm-4 list-container modal d-sm-block">
         <div class="card">
+          <button type="button" class="close d-block d-sm-none" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">Close &times;</span>
+          </button>
           <ul class="list-group">
           </ul>
         </div>
       </div>
-      <div class="col-8">
+      <div class="col-12 col-sm-8">
         <input class="note-title" placeholder="Note Title" maxlength="28" type="text">
         <textarea class="note-textarea" placeholder="Note Text"></textarea>
       </div>
     </div>
   </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   <script src="/assets/js/index.js"></script>
 </body>
 
