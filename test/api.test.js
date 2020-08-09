@@ -26,6 +26,15 @@ app.delete("/delete/:id", (req, res) => {
     res.json(testArr);
 })
 
+app.put("/put/:id", (req, res) => {
+    let testArr = [{"title":"delete", "id":"0"}];
+    let chosen = req.params.id;
+    if(testArr[0].id === chosen){
+        testArr[0].title = req.body.title;
+    }
+    res.json(testArr);
+})
+
 describe("GET", function () {
     it("should get the json object in the response", async (done) => {
         const response = await request.get("/test");
@@ -50,6 +59,17 @@ describe("DELETE", function () {
     it("should DELETE obj in the test array and get an empty array back in the response", async function (done) {
         const response = await request.delete("/delete/0");
         expect(response.text).toBe('[]');
+        done();
+    })
+})
+
+describe("PUT", function () {
+    it("should update obj in the test array", async function (done) {
+        const testObj = {
+            "title": "Put",
+        };
+        const response = await request.put("/put/0").send(testObj);
+        expect(response.text).toBe('[{"title":"Put","id":"0"}]');
         done();
     })
 })

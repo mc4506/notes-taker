@@ -4,8 +4,12 @@ const $saveNoteBtn = $(".save-note");
 const $newNoteBtn = $(".new-note");
 const $noteList = $(".list-container .list-group");
 
+const $editNoteBtn = $(".edit-note");
+
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
+
+let readOnly = true;
 
 // A function for getting all notes from the db
 const getNotes = () => {
@@ -32,6 +36,15 @@ const deleteNote = (id) => {
   });
 };
 
+// function to update a note from the db
+const updateNote = (note, id) => {
+  return $.ajax({
+    url: "/api/notes/" + id,
+    method: "PUT",
+    data: note,
+  })
+}
+
 // If there is an activeNote, display it, otherwise render empty inputs
 const renderActiveNote = () => {
   $saveNoteBtn.hide();
@@ -41,6 +54,7 @@ const renderActiveNote = () => {
     $noteText.attr("readonly", true);
     $noteTitle.val(activeNote.title);
     $noteText.val(activeNote.text);
+    readOnly = true;
   } else {
     $noteTitle.attr("readonly", false);
     $noteText.attr("readonly", false);
@@ -56,10 +70,19 @@ const handleNoteSave = function () {
     text: $noteText.val(),
   };
 
-  saveNote(newNote).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+  if(activeNote.id) {
+    updateNote(newNote, activeNote.id).then(() => {
+      getAndRenderNotes();
+      activeNote.title = $noteTitle.val();
+      activeNote.text = $noteText.val();
+      renderActiveNote();
+    });
+  } else {
+    saveNote(newNote).then(() => {
+      getAndRenderNotes();
+      renderActiveNote();
+    });
+  }
 };
 
 // Delete the clicked note
@@ -146,6 +169,13 @@ $newNoteBtn.on("click", handleNewNoteView);
 $noteList.on("click", ".delete-note", handleNoteDelete);
 $noteTitle.on("keyup", handleRenderSaveBtn);
 $noteText.on("keyup", handleRenderSaveBtn);
+
+$editNoteBtn.on("click", () => {
+  if(readOnly){
+    $noteTitle.attr("readonly", false);
+    $noteText.attr("readonly", false);
+  }
+})
 
 // Gets and renders the initial list of notes
 getAndRenderNotes();

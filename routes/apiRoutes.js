@@ -31,7 +31,7 @@ routes.post("/api/notes", function(req, res){
          if(err) throw err;
          res.send({error: 'Something failed!'});
     })
-    res.send("ok");
+    res.send("success");
 })
 
 routes.delete("/api/notes/:id", function(req, res){
@@ -52,6 +52,26 @@ routes.delete("/api/notes/:id", function(req, res){
         if(err) throw err;
     })
     res.end();
+})
+
+routes.put("/api/notes/:id", function(req, res) {
+    const chosen = req.params.id;
+    let notes=[];
+    readFileAsync("./db/db.json", "utf8").then( data => {
+        notes = JSON.parse(data);
+    }).then(() => {
+        notes.forEach((e, i) => {
+            if(e.id === parseInt(chosen)){
+                e.title = req.body.title;
+                e.text = req.body.text;
+            }
+        })
+        console.log(notes);
+        writeFileAsync("./db/db.json", JSON.stringify(notes));
+    }).catch(err => {
+        if(err) throw err;
+    })
+    res.send("success");
 })
 
 
