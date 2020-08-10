@@ -1,4 +1,4 @@
-# Note Taker ![https://img.shields.io/github/license/mc4506/note-taker](https://img.shields.io/github/license/mc4506/note-taker)
+# Note Taker ![https://img.shields.io/github/license/mc4506/notes-taker](https://img.shields.io/github/license/mc4506/notes-taker)
 
 ## Description
 
